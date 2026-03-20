@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.Json;
 
@@ -14,34 +14,39 @@ namespace ConsoleApp1
             // Deserialize the JSON into a root object
             var data = JsonSerializer.Deserialize<HotelData>(json);
 
-            while (true)
+            if (args.Length > 0)
             {
-                Console.Write(">");
-                var input = Console.ReadLine();
-
-                if (input?.ToLower() == "exit")
+            var command = args[0].ToLower();
+            var hotelName = args.Length > 1 ? args[1].ToLower() : string.Empty;
+            if (command == "findbyname" && args.Length > 1)
+            {
+                var hotels = data?.FindHotelsByName(hotelName);
+                if (hotels != null && hotels.Count > 0)
                 {
-                    break;
-                }
-                else if(input != "findbyname" && input?.Split(' ')[0].ToLower() == "findbyname")
-                {
-                foreach(var hotels in data.Hotels)
-                {
-                    if(hotels.Name?.ToLower().StartsWith(input.Split(' ')[1].ToLower()) == true)
+                    foreach (var hotel in hotels)
                     {
-                        Console.WriteLine(hotels.ToString());
+                        Console.WriteLine(hotel);
                     }
-                }                       
-                }     
-                else if(input != "findbyloc" && input?.Split(' ')[0].ToLower() == "findbyloc")
+                }
+                else
                 {
-                    foreach(var hotels in data.Hotels)
+                    Console.WriteLine($"No hotels found with name starting with '{hotelName}'.");
+                }    
+            }
+            else if (command == "findbyloc" && args.Length > 1)
+                {
+                    var hotels = data?.FindHotelsByLocation(hotelName);
+                    if (hotels != null && hotels.Count > 0)
                     {
-                        if(hotels.Location?.ToLower() == input.Split(' ')[1].ToLower())
+                        foreach (var hotel in hotels)
                         {
-                            Console.WriteLine(hotels.ToString());
+                            Console.WriteLine(hotel);
                         }
-                    }                      
+                    }
+                    else
+                    {
+                        Console.WriteLine($"No hotels found in location '{hotelName}'.");
+                    }
                 }
             }
         }
