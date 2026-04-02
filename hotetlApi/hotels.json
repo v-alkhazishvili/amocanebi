@@ -1,0 +1,28 @@
+{
+    "Hotels": [
+        {
+            "Name": "Astoria",
+            "Location": "Tbilisi",
+            "Rating": 4.5,
+            "PricePerNight": 150
+        },
+        {
+            "Name": "Nukbari",
+            "Location": "Tbilisi",
+            "Rating": 4.0,
+            "PricePerNight": 120
+        },
+        {
+            "Name": "Evrika",
+            "Location": "Batumi",
+            "Rating": 3.5,
+            "PricePerNight": 100
+        },
+        {
+            "Name": "Ankori",
+            "Location": "Batumi",
+            "Rating": 3.5,
+            "PricePerNight": 100
+        }
+    ]
+}
